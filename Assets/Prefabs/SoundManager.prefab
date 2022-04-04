@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8570287619337562301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8570287619337562300}
+  - component: {fileID: 8570287619337562303}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8570287619337562300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8570287619337562301}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1647.9467, y: 514.2262, z: -73.46167}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8570287619337562303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8570287619337562301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac4af50e3f4aa048b1d55d9febf6fe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: MainTheme
+    audioType: 1
+    type: 21
+    clipList:
+    - clip: {fileID: 8300000, guid: f1cb0e3489e03614b824c54a2be1bcde, type: 3}
+      group: {fileID: 1045529470117036066, guid: d6102a70a325bf2409a936b99795be67, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Ambience
+    audioType: 3
+    type: 22
+    clipList:
+    - clip: {fileID: 8300000, guid: 4dea2f8fe6e22fb4bb46dfde97245ef5, type: 3}
+      group: {fileID: -9193450456939779751, guid: d6102a70a325bf2409a936b99795be67, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Theme
+    audioType: 2
+    type: 21
+    clipList:
+    - clip: {fileID: 8300000, guid: 5a68e18780768ea419c6fe7702e7ffd1, type: 3}
+      group: {fileID: 1124687065590552276, guid: d6102a70a325bf2409a936b99795be67, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Theme-Memories
+    audioType: 4
+    type: 21
+    clipList:
+    - clip: {fileID: 8300000, guid: 09bee3ce0f33ecd4b8257c85d1bfda45, type: 3}
+      group: {fileID: 4666802537727692692, guid: d6102a70a325bf2409a936b99795be67, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Alarme
+    audioType: 11
+    type: 22
+    clipList:
+    - clip: {fileID: 8300000, guid: d828fb9c41fa4324c9cbcc7939b9deea, type: 3}
+      group: {fileID: 1434752126447387406, guid: d6102a70a325bf2409a936b99795be67, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Encaixe
+    audioType: 12
+    type: 22
+    clipList:
+    - clip: {fileID: 8300000, guid: d4aa8b26572a9a14781ce6c6302e41a5, type: 3}
+      group: {fileID: -3112383335043647318, guid: d6102a70a325bf2409a936b99795be67, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: ShipHit
+    audioType: 13
+    type: 22
+    clipList:
+    - clip: {fileID: 8300000, guid: d752693f27269724394be96365915c73, type: 3}
+      group: {fileID: 9189362993178908335, guid: d6102a70a325bf2409a936b99795be67, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Elevator
+    audioType: 14
+    type: 22
+    clipList:
+    - clip: {fileID: 8300000, guid: c53dc559fac63c94e963b9e228b4e6bd, type: 3}
+      group: {fileID: -6044475017281959292, guid: d6102a70a325bf2409a936b99795be67, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Propulsor
+    audioType: 15
+    type: 22
+    clipList:
+    - clip: {fileID: 8300000, guid: 4599f908fef94f544a211e83359ef469, type: 3}
+      group: {fileID: 3747580988614385852, guid: d6102a70a325bf2409a936b99795be67, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: button click
+    audioType: 10
+    type: 22
+    clipList:
+    - clip: {fileID: 8300000, guid: 9919c985ccf002c45849b7178c9077d6, type: 3}
+      group: {fileID: 4399096421049836176, guid: d6102a70a325bf2409a936b99795be67, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: button Selected
+    audioType: 40
+    type: 22
+    clipList:
+    - clip: {fileID: 8300000, guid: b92e538310d4d3846be8bbda8fb816e7, type: 3}
+      group: {fileID: -5547214540475356516, guid: d6102a70a325bf2409a936b99795be67, type: 2}
+    - clip: {fileID: 8300000, guid: 6d3ae864b5867924abaa7f34ce290933, type: 3}
+      group: {fileID: -5547214540475356516, guid: d6102a70a325bf2409a936b99795be67, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0

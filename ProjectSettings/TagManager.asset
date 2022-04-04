@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Section
+  - RightSide
+  - LeftSide
+  - Wreckage
+  - WreckageTutorial
+  - EndPart
+  - GameOver
+  - FastWreckage
+  - Respawner
+  - Debris
+  - Station
+  - LastWreckage
+  - Mask
+  - NPC
+  - Limit
+  - StartAnimation
+  - SpaceShip
+  - Inception
+  - ChangeCamera
+  - Door
+  - DoorCollider
+  - Ulises
+  - ButtonTrigger
+  - ZoomOut
+  - SolarPanel
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Mask
+  - SpaceShip
+  - Limit
+  - KiteTail
+  - ForeGround
+  - RagdollPart
+  - Letter
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: BackGround
+    uniqueID: 3225875725
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 3658553371
+    locked: 0
+  - name: ForeGround
+    uniqueID: 100130739
+    locked: 0
+  - name: Explosion
+    uniqueID: 1579493499
+    locked: 0
+  - name: UI
+    uniqueID: 812149179
+    locked: 0

@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-String-Tables-English (en)
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-String-Tables-English (en)
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 69ecc72d2f76f174eaf77405f8ae02ed
+  m_SerializeEntries:
+  - m_GUID: 20f1411d336d2b546a8e961d369e1366
+    m_Address: TextsLocations_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+  - m_GUID: 4bb9ccc562d3e7745aa3a2c36ba21fb7
+    m_Address: Buttons_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+  - m_GUID: e86f5c7887a6ead4cb575d6e316f40e9
+    m_Address: UlisesLines_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+  - m_GUID: 7753c08198b193842badb4125149a343
+    m_Address: PAD_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+  - m_GUID: a80941719bb1e1f45ace1578d30f58e3
+    m_Address: UlisesConnection_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: aecceacde85931140a4ac52cfe2e6a5d, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 75fbc7cd535dede4cb599ca4a69bd2f5, type: 2}
+    - {fileID: 11400000, guid: 5e02a82ef9cf69343b165c4cf51db213, type: 2}

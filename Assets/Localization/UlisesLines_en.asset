@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UlisesLines_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: f4386f9deecc93542905c8fdf0d21569, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 15763361792
+    m_Localized: Hello John!  I am Ulises, an Unique Logical Intelligent System Ever
+      Seen.  Welcome to the station!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1417533313024
+    m_Localized: "To carry out your tasks, I will grant you the necessary permissions
+      for you to have access to protocol 1. \n\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13836729044992
+    m_Localized: "\nOn your PAD you will have information about your tasks, your
+      suit and you will be able to see the map. \r\n\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18000599175168
+    m_Localized: 'I''ll just need to update it.
+
+
+      Please press "P" to access
+      your PAD'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279931792773120
+    m_Localized: "All set! \n\nNow your Pad will connect to panels which has this
+      symbol: "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 283258555322368
+    m_Localized: 'Have a nice day! '
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 1

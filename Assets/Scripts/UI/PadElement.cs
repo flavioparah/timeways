@@ -16,7 +16,6 @@ public class PadElement : MonoBehaviour, ISelectHandler
     public void OnSelect(BaseEventData eventData)
     {
         Navigation nav = this.GetComponent<Button>().navigation;
-        Debug.Log(padScreen.GetButtonToNavigate());
         if (padScreen.GetButtonToNavigate() == null) return;
         nav.selectOnLeft = padScreen.GetButtonToNavigate();
         this.GetComponent<Button>().navigation = nav;

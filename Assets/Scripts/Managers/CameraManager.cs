@@ -14,15 +14,15 @@ public class CameraManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null)
-        {
+        //if(Instance == null)
+        //{
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+        //    DontDestroyOnLoad(this.gameObject);
+        //}
+        //else
+        //{
+        //    Destroy(this.gameObject);
+        //}
     }
     // Start is called before the first frame update
     void Start()

@@ -50,6 +50,8 @@ public class Radar : MonoBehaviour
             player.GetComponent<SpaceShip>().SetArrived();
             HUD.Instance.ShowLockedText();
             SoundManager.Instance.Play(AudioTypes.SFX_Encaixe);
+
+            this.gameObject.SetActive(false);
         }
         // distanceX = Mathf.Abs(distanceX);
         //  SetRadarPosition(GetPercentage(), GetPercentageY());

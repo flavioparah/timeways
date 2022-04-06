@@ -229,11 +229,12 @@ public class SpaceShip : MonoBehaviour
 
         else if (lives == 0)
         {
-            gameOver = true;
-            spriteRenderer.sprite = null;
-            explosion.SetActive(true);
-            StartCoroutine(ExplosionFade());
-            GameManager.Instance.GameOver();
+            return;
+            //gameOver = true;
+            //spriteRenderer.sprite = null;
+            //explosion.SetActive(true);
+            //StartCoroutine(ExplosionFade());
+            //GameManager.Instance.GameOver();
         }
 
         GameManager.Instance.SetShipState(lives);
@@ -251,6 +252,7 @@ public class SpaceShip : MonoBehaviour
         headlights.SetActive(false);
         arrivalCam.StopShake(true);
         GameManager.Instance.SaveShipState();
+        StartCoroutine(ChangeCamera());
     }
 
     IEnumerator ExplosionFade()
@@ -270,6 +272,12 @@ public class SpaceShip : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    IEnumerator ChangeCamera()
+    {
+        yield return new WaitForSeconds(1.5f);
+        CameraManager.Instance.ChangeCamera();
     }
 }
 

@@ -16,4 +16,9 @@ public class SpaceStation : MonoBehaviour
     {
         transform.Rotate(new Vector3(0, 0, angularSpeed * Time.deltaTime), Space.World);
     }
+
+    public void SetAngularSpeed(float s)
+    {
+        angularSpeed = s;
+    }
 }

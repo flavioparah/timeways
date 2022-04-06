@@ -92,6 +92,7 @@ public class Player : MonoBehaviour
     bool buttonTrigger;
     bool zoomingOut;
 
+    bool cantMove;
     // Start is called before the first frame update
     void Start()
     {
@@ -235,6 +236,7 @@ public class Player : MonoBehaviour
 
     private void Move(Vector2 move)
     {
+        if (cantMove) return;
         if (inTheUI) return;
         if (padInteracting) return;
         if (interacting) return;
@@ -260,7 +262,7 @@ public class Player : MonoBehaviour
 
     void InteractPad()
     {
-
+        if (cantMove) return;
         #region In The UI Scene
         if (inTheUI && !timelinePlayed)
         {
@@ -296,14 +298,14 @@ public class Player : MonoBehaviour
         pad.OpenPad(panel);
     }
 
-    void Interact()
+    public void Interact()
     {
+       // if (cantMove) return;
 
-        
         if (exitHatchButton)
         {
             anim.StartInteract(Enums.Interaction.ExitHatch);
-           
+
         }
 
 
@@ -590,10 +592,14 @@ public class Player : MonoBehaviour
         if (collision.tag == "Section")
         {
             actualSection = collision.GetComponent<Section>();
+            if (actualSection.name == "SectionA4" && GameManager.Instance.GetSceneName() == "Station2")
+            {
+                CameraManager.Instance.ChangeCamera();
+            }
         }
         if (collision.tag == "ExitHatch")
         {
-            exitHatchButton = true; 
+            exitHatchButton = true;
         }
 
 
@@ -604,7 +610,7 @@ public class Player : MonoBehaviour
     {
         EndStationCutscene.Play();
         EndStationCutscene.stopped += EndLevel;
-       // actualSection.GetComponent<ExitHatch>().OpenHatch();
+        // actualSection.GetComponent<ExitHatch>().OpenHatch();
     }
 
     void EndLevel(PlayableDirector director)
@@ -758,5 +764,17 @@ public class Player : MonoBehaviour
         //  mouth.Talk("What...? What is this? ");
         timelinePlayed = true;
         //  this.gameObject.SetActive(false);
+    }
+
+    public void CantMoveForSeconds(float seconds)
+    {
+        cantMove = true;
+        StartCoroutine(NotMovingForSeconds(seconds));
+    }
+
+    IEnumerator NotMovingForSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        cantMove = false;
     }
 }

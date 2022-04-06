@@ -221,4 +221,9 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(WaitToMainMenu());
     }
+
+    public string GetSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
 }

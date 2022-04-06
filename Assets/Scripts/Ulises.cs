@@ -10,6 +10,7 @@ public class Ulises : MonoBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] Player player;
+    [SerializeField] SpaceStation station;
     [SerializeField] Pad pad;
     [SerializeField] UlisesConnection ulisesPad;
     [SerializeField] Animator anim;
@@ -23,17 +24,22 @@ public class Ulises : MonoBehaviour
 
     [SerializeField] GameObject tutorial;
     [SerializeField] List<TextMeshProUGUI> lines;
-    int lineIndex;
+    [SerializeField] int lineIndex;
     bool connected;
     bool waitAction;
-
+    [SerializeField] bool startInteracting;
     // Start is called before the first frame update
     void Start()
     {
         pad.padClosed += ConnectionClosed;
-        lineIndex = 0;
+        // lineIndex = 0;
         tutorial.SetActive(false);
         continueButton.GetComponent<Button>().interactable = false;
+        if (startInteracting)
+        {
+            StartCoroutine(StartingInteraction());
+
+        }
     }
 
     private void OnDisable()
@@ -53,6 +59,7 @@ public class Ulises : MonoBehaviour
     {
 
         lineIndex++;
+
         if (lineIndex == 3)
         {
             player.GrantPadAccess();
@@ -69,13 +76,20 @@ public class Ulises : MonoBehaviour
             wifiSymbol.SetActive(false);
         }
 
-        if (lineIndex == 6)
+        if (lineIndex == 6 || lineIndex == 8)
         {
             StopTalk();
             player.CloseUlises();
+            this.GetComponent<Collider2D>().enabled = false;
+            continueButton.GetComponent<Button>().interactable = false;
+            if (lineIndex == 8)
+            {
+                CameraManager.Instance.ChangeCamera();
+                station.SetAngularSpeed(-3);
+            }
         }
-        if (lineIndex >= lines.Count) return;
 
+        if (lineIndex >= lines.Count) return;
         Talk(lines[lineIndex].text);
 
     }
@@ -273,6 +287,17 @@ public class Ulises : MonoBehaviour
         anim.SetBool("Open", true);
         yield return new WaitForSeconds(.25f);
         StartTalk();
+    }
+
+    IEnumerator StartingInteraction()
+    {
+        player.CantMoveForSeconds(2f);
+        connected = true;
+        TurnOn();
+        player.ConnectUlises(this);
+        yield return new WaitForSeconds(1.5f);
+        player.Interact();
+       // player.UlisesInteraction();
     }
 
     //ÌEnumerator WaitCameraToClose()

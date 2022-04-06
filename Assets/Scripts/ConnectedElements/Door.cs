@@ -18,13 +18,16 @@ public class Door : MonoBehaviour
 
     [SerializeField] float maxBright;
     [SerializeField] float minBright;
+    [SerializeField] bool startClosed;
 
     public UnityAction<bool> doorClosed;
     // Start is called before the first frame update
     void Start()
     {
+       
         GetLights();
         doorCollider.SetActive(closed);
+        if (!startClosed) ToggleDoor();
     }
 
     // Update is called once per frame

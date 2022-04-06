@@ -7,8 +7,6 @@ public class PlayerSpace : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float angularSpeed;
     [SerializeField] float force;
-    [SerializeField] Transform hook;
-    [SerializeField] Transform jetPack;
     [SerializeField] Transform station;
     [SerializeField] Transform antenna;
 
@@ -20,7 +18,6 @@ public class PlayerSpace : MonoBehaviour
     InputReader inputReader;
     Rigidbody2D rb;
     Vector2 direction;
-    List<Transform> bones = new List<Transform>();
     bool movingRight;
     bool movingLeft;
     bool movingUp;
@@ -29,7 +26,7 @@ public class PlayerSpace : MonoBehaviour
     float maxDistance;
     [SerializeField] bool mainMenu;
 
-
+    [SerializeField] GameObject particles;
     SolarPanel solarPanel;
     private void Awake()
     {
@@ -37,7 +34,6 @@ public class PlayerSpace : MonoBehaviour
     }
     private void Start()
     {
-        SetBones();
         rb = this.GetComponent<Rigidbody2D>();
         maxDistance = Vector2.Distance(station.position, antenna.position);
         inputReader = this.GetComponent<InputReader>();
@@ -69,10 +65,7 @@ public class PlayerSpace : MonoBehaviour
             // transform.Translate(direction * speed * Time.deltaTime, Space.World);
         }
 
-        if (hook != null)
-        {
-            hook.transform.position = jetPack.position;
-        }
+    
         if (movingRight)
         {
             rb.AddForce(Vector2.right * force);
@@ -92,8 +85,7 @@ public class PlayerSpace : MonoBehaviour
             rb.AddForce(Vector2.down * force);
         }
 
-        if (!mainMenu)
-            SetSize();
+      
     }
     private void FixedUpdate()
     {
@@ -107,6 +99,7 @@ public class PlayerSpace : MonoBehaviour
         movingLeft = move.x < 0;
         movingUp = move.y > 0;
         movingDown = move.y < 0;
+        particles.SetActive(true);
     }
 
     private void CancelMove()
@@ -116,6 +109,7 @@ public class PlayerSpace : MonoBehaviour
         movingUp = false;
         movingDown = false;
         direction = Vector2.zero;
+        particles.SetActive(false);
     }
 
     void Interact()
@@ -125,46 +119,14 @@ public class PlayerSpace : MonoBehaviour
             solarPanel.Access();
         }
     }
-    void SetBones()
-    {
-        Transform rope = hook.parent;
 
-        for (int i = 1; i <= 20; i++)
-        {
-            bones.Add(rope.GetChild(i));
-        }
-
-    }
-
-    void SetSize()
-    {
-        float distance = Vector2.Distance(this.transform.position, station.position);
-
-        float s = ((maxSizePlayer - minSizePlayer) * (maxDistance - distance) / maxDistance) + minSizePlayer;
-        s = Mathf.Clamp(s, minSizePlayer, maxSizePlayer);
-        Vector3 size = new Vector3(s, s, s);
-        this.transform.localScale = size;
-
-        // SetBonesSize();
-    }
-
-    void SetBonesSize()
-    {
-        foreach (Transform b in bones)
-        {
-            float distance = Vector2.Distance(b.position, station.position);
-            float s = ((maxSizeBone - minSizeBone) * (maxDistance - distance) / maxDistance) + minSizeBone;
-            s = Mathf.Clamp(s, minSizeBone, maxSizeBone);
-            Vector3 size = new Vector3(s, s, s);
-            b.transform.localScale = size;
-        }
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
         if(collision.tag == "SolarPanel")
         {
             solarPanel = collision.GetComponent<SolarPanel>();
+            CameraManager.Instance.ChangeCamera();
         }
     }
 
@@ -173,6 +135,7 @@ public class PlayerSpace : MonoBehaviour
         if (collision.tag == "SolarPanel")
         {
             solarPanel = null;
+            CameraManager.Instance.ChangeCamera();
         }
     }
 

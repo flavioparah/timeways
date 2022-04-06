@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
             SoundManager.Instance.Stop(AudioTypes.BGM_Theme);
         }
 
-        if(scene.name == "StationArrival")
+        if (scene.name == "StationArrival")
         {
             SoundManager.Instance.Stop(AudioTypes.BGM_MainTheme);
             SoundManager.Instance.Play(AudioTypes.SFX_Ambience);
@@ -84,6 +84,12 @@ public class GameManager : MonoBehaviour
             SoundManager.Instance.Stop(AudioTypes.BGM_MainTheme);
             SoundManager.Instance.Play(AudioTypes.BGM_Theme);
         }
+
+        if (scene.name == "Puzzles")
+        {
+            LoadShipState();
+        }
+
     }
     private void Start()
     {

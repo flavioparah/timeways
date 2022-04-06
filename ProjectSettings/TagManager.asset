@@ -29,6 +29,7 @@ TagManager:
   - ButtonTrigger
   - ZoomOut
   - SolarPanel
+  - ExitHatch
   layers:
   - Default
   - TransparentFX

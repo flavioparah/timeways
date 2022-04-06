@@ -31,6 +31,7 @@ public class JohnAnimation : MonoBehaviour
     [SerializeField] GameObject zoomOutButton;
     [SerializeField] GameObject zoomedCam;
 
+    bool hasJetPack;
     // Start is called before the first frame update
     void Awake()
     {
@@ -195,7 +196,7 @@ public class JohnAnimation : MonoBehaviour
         padLeft.SetActive(rigged.GetComponent<SpriteRenderer>().flipX);
         padRight.SetActive(!rigged.GetComponent<SpriteRenderer>().flipX);
     }
-
+  
     public void DisablePad()
     {
         padLeft.SetActive(false);
@@ -228,6 +229,11 @@ public class JohnAnimation : MonoBehaviour
         if (interaction == Enums.Interaction.Ulises)
         {
             player.UlisesInteraction();
+        }
+
+        if(interaction == Enums.Interaction.ExitHatch)
+        {
+            player.OpenHatch();
         }
         }
 
@@ -265,4 +271,8 @@ public class JohnAnimation : MonoBehaviour
 
         GameManager.Instance.EndLevel();
     }
+
+  
+
+   
 }

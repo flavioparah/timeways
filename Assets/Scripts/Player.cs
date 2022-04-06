@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] PathCreator path;
     [SerializeField] float distance;
     [SerializeField] bool gravityOn;
-
+    [SerializeField] PlayableDirector EndStationCutscene;
     [SerializeField] JohnAnimation anim;
     bool changingSection;
     Quaternion orientation;
@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     bool moving;
     float move;
     bool padAccess;
+    bool exitHatchButton;
 
     //-------- Space --------------
     bool clicking;
@@ -298,11 +299,16 @@ public class Player : MonoBehaviour
     void Interact()
     {
 
+        
+        if (exitHatchButton)
+        {
+            anim.StartInteract(Enums.Interaction.ExitHatch);
+           
+        }
 
 
         if (buttonTrigger)
         {
-            Debug.Log("zoomout");
             zoomingOut = true;
             anim.StartInteract(Enums.Interaction.zoomOutButton);
         }
@@ -581,8 +587,31 @@ public class Player : MonoBehaviour
         {
             buttonTrigger = true;
         }
+        if (collision.tag == "Section")
+        {
+            actualSection = collision.GetComponent<Section>();
+        }
+        if (collision.tag == "ExitHatch")
+        {
+            exitHatchButton = true; 
+        }
+
+
     }
 
+
+    public void OpenHatch()
+    {
+        EndStationCutscene.Play();
+        EndStationCutscene.stopped += EndLevel;
+       // actualSection.GetComponent<ExitHatch>().OpenHatch();
+    }
+
+    void EndLevel(PlayableDirector director)
+    {
+        EndStationCutscene.stopped -= EndLevel;
+        GameManager.Instance.EndLevel();
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
 
@@ -606,6 +635,12 @@ public class Player : MonoBehaviour
         {
             buttonTrigger = false;
         }
+
+        if (collision.tag == "ExitHatch")
+        {
+            exitHatchButton = false;
+        }
+
         //if(collision.tag == "Section")
         //{
         //    Debug.Log("saiu");

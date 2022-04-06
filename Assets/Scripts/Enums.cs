@@ -9,7 +9,7 @@ public class Enums : MonoBehaviour
 
     public enum Screen { connection, map, ulises, suit };
 
-    public enum Interaction { zoomOutButton, Ulises };
+    public enum Interaction { zoomOutButton, Ulises, ExitHatch };
 
     public enum PuzzleMove { up, down, left, right };
 

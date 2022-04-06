@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering.Universal;
 
 public class Door : MonoBehaviour
@@ -17,6 +18,8 @@ public class Door : MonoBehaviour
 
     [SerializeField] float maxBright;
     [SerializeField] float minBright;
+
+    public UnityAction<bool> doorClosed;
     // Start is called before the first frame update
     void Start()
     {
@@ -98,6 +101,7 @@ public class Door : MonoBehaviour
         }
 
         doorCollider.SetActive(closed);
+         doorClosed?.Invoke(closed);
     }
 
     public void Blink()

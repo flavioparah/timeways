@@ -5,7 +5,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 
 public class Section : MonoBehaviour
 {
-    [SerializeField] Light2D light;
+    [SerializeField] protected new Light2D light;
     private void Start()
     {
        
@@ -19,7 +19,7 @@ public class Section : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
@@ -27,7 +27,7 @@ public class Section : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    protected void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
@@ -35,12 +35,12 @@ public class Section : MonoBehaviour
         }
     }
 
-    void TurnLightOn()
+    protected void TurnLightOn()
     {
         StartCoroutine(TurningLightOn());
     }
 
-    void TurnLightOff()
+    protected void TurnLightOff()
     {
         light.enabled = false;
     }

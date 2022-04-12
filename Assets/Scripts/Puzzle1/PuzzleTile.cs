@@ -28,7 +28,7 @@ public class PuzzleTile : MonoBehaviour
 
     public void TurnOnYellow()
     {
-        light.intensity = 5;
+        light.intensity = 2.5f;
         light.color = Color.yellow;
         isOn = true;
         isGreen = false;
@@ -37,7 +37,7 @@ public class PuzzleTile : MonoBehaviour
 
     public void TurnOnGreen()
     {
-        light.intensity = 5;
+        light.intensity = 2.5f;
         light.color = Color.green;
         isGreen = true;
         isOn = true;
@@ -46,7 +46,7 @@ public class PuzzleTile : MonoBehaviour
 
     public void Block()
     {
-        light.intensity = 5;
+        light.intensity = 2.5f;
         light.color = Color.red;
         isGreen = false;
         isOn = true;

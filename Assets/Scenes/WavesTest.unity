@@ -294,21 +294,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wave
       objectReference: {fileID: 0}
-    - target: {fileID: 5007666384391738007, guid: b872920087fb1e84986b0b3fec891d31, type: 3}
-      propertyPath: k
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5007666384391738007, guid: b872920087fb1e84986b0b3fec891d31, type: 3}
-      propertyPath: speed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5007666384391738007, guid: b872920087fb1e84986b0b3fec891d31, type: 3}
-      propertyPath: points
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 5007666384391738007, guid: b872920087fb1e84986b0b3fec891d31, type: 3}
-      propertyPath: pointInterval
-      value: 0.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b872920087fb1e84986b0b3fec891d31, type: 3}

@@ -9,6 +9,8 @@ public class CameraManager : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera playerCam;
     [SerializeField] CinemachineVirtualCamera mainCam;
     [SerializeField] CinemachineVirtualCamera spaceCam;
+    [SerializeField] CinemachineVirtualCamera panelCam;
+    [SerializeField] CinemachineVirtualCamera antenaCam;
 
     bool isPlayerCam = true;
 
@@ -16,7 +18,7 @@ public class CameraManager : MonoBehaviour
     {
         //if(Instance == null)
         //{
-            Instance = this;
+        Instance = this;
         //    DontDestroyOnLoad(this.gameObject);
         //}
         //else
@@ -45,6 +47,13 @@ public class CameraManager : MonoBehaviour
     public void StopCamera()
     {
         spaceCam.Follow = null;
-       // spaceCam.GetCinemachineComponent<>
+        // spaceCam.GetCinemachineComponent<>
+    }
+
+    public void ChangeCamera(bool isPanelCam, bool entering)
+    {
+        playerCam.gameObject.SetActive(!entering);
+        panelCam.gameObject.SetActive(isPanelCam && entering);
+        antenaCam.gameObject.SetActive(!isPanelCam && entering);
     }
 }

@@ -10,10 +10,12 @@ public class PlayerSpace : MonoBehaviour
     [SerializeField] Transform station;
     [SerializeField] Transform antenna;
 
-    [SerializeField] float minSizePlayer;
-    [SerializeField] float maxSizePlayer;
-    [SerializeField] float minSizeBone;
-    [SerializeField] float maxSizeBone;
+    //[SerializeField] float minSizePlayer;
+    //[SerializeField] float maxSizePlayer;
+    //[SerializeField] float minSizeBone;
+    //[SerializeField] float maxSizeBone;
+    [SerializeField] Pad pad;
+    Panel panel;
 
     InputReader inputReader;
     Rigidbody2D rb;
@@ -28,6 +30,9 @@ public class PlayerSpace : MonoBehaviour
 
     [SerializeField] GameObject particles;
     SolarPanel solarPanel;
+
+    bool interacting;
+    bool padInteracting;
     private void Awake()
     {
 
@@ -41,6 +46,7 @@ public class PlayerSpace : MonoBehaviour
         inputReader.spaceMoveEvent += Move;
         inputReader.cancelSpaceMoveEvent += CancelMove;
         inputReader.interactEvent += Interact;
+        inputReader.interactPadEvent += InteractPad;
 
     }
 
@@ -55,6 +61,7 @@ public class PlayerSpace : MonoBehaviour
         inputReader.cancelSpaceMoveEvent -= CancelMove;
 
         inputReader.interactEvent -= Interact;
+        inputReader.interactPadEvent -= InteractPad;
     }
 
     private void Update()
@@ -120,13 +127,36 @@ public class PlayerSpace : MonoBehaviour
         }
     }
 
+    void InteractPad()
+    {
+      
+       
+        if (padInteracting)
+        {
+            pad.ClosePadScreen();
+            return;
+        }
+
+        pad.OpenPad(panel);
+       
+        padInteracting = true;
+
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
         if(collision.tag == "SolarPanel")
         {
             solarPanel = collision.GetComponent<SolarPanel>();
-            CameraManager.Instance.ChangeCamera();
+            CameraManager.Instance.ChangeCamera(true, true);
+        }
+
+        if (collision.tag == "Antenna")
+        {
+            solarPanel = collision.GetComponent<SolarPanel>();
+            CameraManager.Instance.ChangeCamera(true, true);
         }
     }
 
@@ -135,7 +165,13 @@ public class PlayerSpace : MonoBehaviour
         if (collision.tag == "SolarPanel")
         {
             solarPanel = null;
-            CameraManager.Instance.ChangeCamera();
+            CameraManager.Instance.ChangeCamera(false, false);
+        }
+
+        if (collision.tag == "Antenna")
+        {
+            solarPanel = null;
+            CameraManager.Instance.ChangeCamera(false, false);
         }
     }
 

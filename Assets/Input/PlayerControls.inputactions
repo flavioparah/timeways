@@ -405,6 +405,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "InteractPad",
+                    "type": "Button",
+                    "id": "7e4df1d9-7dc1-4cfe-9ed5-554a0da651c8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "c381f4fc-c209-4d49-a391-dae272b0abc0",
@@ -573,6 +581,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "09fd1b1c-6c2b-4a9b-aab6-33eb61589974",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InteractPad",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "87cfe268-30b4-420e-9d7c-43a04f28fa91",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InteractPad",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

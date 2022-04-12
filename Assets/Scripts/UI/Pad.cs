@@ -9,6 +9,7 @@ public class Pad : MonoBehaviour
     [SerializeField] GameObject padPanel;
     [SerializeField] PadScreen padScreen;
     [SerializeField] Player player;
+    [SerializeField] bool isOutside;
     #endregion
 
     #region Members

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enums : MonoBehaviour
 {
     public enum WreckageType { normal, fast, dangerous };
-    public enum Connection { none, door, elevator, ulises };
+    public enum Connection { none, door, elevator, ulises, antenna };
 
     public enum Screen { connection, map, ulises, suit };
 

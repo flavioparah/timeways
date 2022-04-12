@@ -90,6 +90,14 @@ public class PadScreen : MonoBehaviour
             elevatorConnection.Show(panel);
             connection = elevatorConnection;
         }
+
+        else if (panel.GetConnection() == Enums.Connection.antenna)
+        {
+            actualBg = elevatorConnection.GetBG();
+            elevatorConnection.Show(panel);
+            connection = elevatorConnection;
+        }
+
         connectionTab.GetComponent<Button>().interactable = false;
         StartCoroutine(turningScreenOn(true));
     }

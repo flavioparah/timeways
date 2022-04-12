@@ -70,6 +70,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Antena
+    uniqueID: 2804958547
+    locked: 0
   - name: Player
     uniqueID: 3658553371
     locked: 0

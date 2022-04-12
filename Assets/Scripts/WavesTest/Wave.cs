@@ -10,6 +10,10 @@ public class Wave : MonoBehaviour
     [SerializeField] float pointInterval;
     [SerializeField] float speed;
     [SerializeField] float k;
+    [SerializeField] bool isMainWave;
+    [SerializeField] float incSpeed;
+
+    Wave mainWave;
 
     float time;
     Vector3[] positions;
@@ -19,7 +23,11 @@ public class Wave : MonoBehaviour
     void Start()
     {
         wave = this.GetComponent<LineRenderer>();
-       
+        if (!isMainWave)
+        {
+            mainWave = this.transform.parent.Find("MainWave").GetComponent<Wave>();
+        }
+
     }
 
     // Update is called once per frame
@@ -33,6 +41,7 @@ public class Wave : MonoBehaviour
         CreatePoints();
         Senoid();
 
+        CheckWaves();
     }
 
 
@@ -45,9 +54,9 @@ public class Wave : MonoBehaviour
     void CreatePoints()
     {
         List<Vector3> positionsList = new List<Vector3>();
-        float x = 0;
+        float x = 200;
         Debug.Log(points);
-        for(int i = 0; i < points; i++)
+        for (int i = 0; i < points; i++)
         {
             Vector3 p = new Vector3(x, GetY(x));
             positionsList.Add(p);
@@ -59,7 +68,61 @@ public class Wave : MonoBehaviour
 
     float GetY(float x)
     {
-        float y = amplitude * Mathf.Sin(x * period - (k *time)) ;
+        float y = amplitude * Mathf.Sin(x * period - (k * time));
         return y;
+    }
+
+    //-----------------------------------------------
+
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
+    public float GetPeriod()
+    {
+        return period;
+    }
+
+    public float GetAmplitude()
+    {
+        return amplitude;
+    }
+
+    public void SetSpeed(bool increasing)
+    {
+        if (isMainWave) return;
+        speed += (increasing ? incSpeed : -incSpeed);
+    }
+
+    public void SetPeriod(bool increasing)
+    {
+        if (isMainWave) return;
+        period += (increasing ? incSpeed : -incSpeed);
+    }
+
+    public void SetAmplitude(bool increasing)
+    {
+        if (isMainWave) return;
+        amplitude += (increasing ? incSpeed : -incSpeed);
+    }
+
+    public void CheckWaves()
+    {
+        if (isMainWave) return;
+        float p = mainWave.GetPeriod();
+        float a = mainWave.GetAmplitude();
+        float s = mainWave.GetSpeed();
+        float factor = .05f;
+        if (period > p - factor && period < p - factor)
+        {
+            if (amplitude > a - factor && amplitude < a + factor)
+            {
+                if (speed > s - factor && speed < s + factor)
+                {
+                    Debug.Log("you win!!!!!!");
+                }
+            }
+        }
     }
 }

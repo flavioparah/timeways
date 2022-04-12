@@ -240,7 +240,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47094b20e8465484ea0d948a33167426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 100
+  points: 400
   amplitude: 1.2
   period: 0.67
-  pointInterval: 0.5
+  pointInterval: 0.1
+  speed: 2
+  k: 10

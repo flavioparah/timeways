@@ -25,6 +25,7 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] Transform initialPoint;
     [SerializeField] InputReader inputReader;
     [SerializeField] List<Vector2> blockedTiles = new List<Vector2>();
+    [SerializeField] Transform container;
 
     float time;
     bool moving;
@@ -302,7 +303,7 @@ public class PuzzleManager : MonoBehaviour
         offsetX += offsetX * 1.15f;
 
         float offsetY = tilePrefab.GetComponent<SpriteRenderer>().bounds.extents.y;
-        offsetY += offsetY * 1.15f;
+        offsetY += offsetY * 1.1f;
 
         Vector2 pos = initialPoint.position;
         for (int i = 0; i < lines; i++)
@@ -310,6 +311,7 @@ public class PuzzleManager : MonoBehaviour
             for (int j = 0; j < columns; j++)
             {
                 PuzzleTile t = Instantiate(tilePrefab, pos, Quaternion.identity);
+                t.transform.SetParent(container);
                 tiles.Add(t);
                 Vector2 newPos = new Vector2(i, j);
                 tilePositions.Add(newPos, t);

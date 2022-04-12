@@ -418,6 +418,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""InteractPad"",
+                    ""type"": ""Button"",
+                    ""id"": ""7e4df1d9-7dc1-4cfe-9ed5-554a0da651c8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""c381f4fc-c209-4d49-a391-dae272b0abc0"",
@@ -586,6 +594,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09fd1b1c-6c2b-4a9b-aab6-33eb61589974"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractPad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87cfe268-30b4-420e-9d7c-43a04f28fa91"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractPad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -788,6 +818,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         // Space
         m_Space = asset.FindActionMap("Space", throwIfNotFound: true);
         m_Space_SpaceMove = m_Space.FindAction("SpaceMove", throwIfNotFound: true);
+        m_Space_InteractPad = m_Space.FindAction("InteractPad", throwIfNotFound: true);
         m_Space_Pause = m_Space.FindAction("Pause", throwIfNotFound: true);
         m_Space_Interact = m_Space.FindAction("Interact", throwIfNotFound: true);
         // Kite
@@ -932,6 +963,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Space;
     private ISpaceActions m_SpaceActionsCallbackInterface;
     private readonly InputAction m_Space_SpaceMove;
+    private readonly InputAction m_Space_InteractPad;
     private readonly InputAction m_Space_Pause;
     private readonly InputAction m_Space_Interact;
     public struct SpaceActions
@@ -939,6 +971,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         private @PlayerControls m_Wrapper;
         public SpaceActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @SpaceMove => m_Wrapper.m_Space_SpaceMove;
+        public InputAction @InteractPad => m_Wrapper.m_Space_InteractPad;
         public InputAction @Pause => m_Wrapper.m_Space_Pause;
         public InputAction @Interact => m_Wrapper.m_Space_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Space; }
@@ -953,6 +986,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @SpaceMove.started -= m_Wrapper.m_SpaceActionsCallbackInterface.OnSpaceMove;
                 @SpaceMove.performed -= m_Wrapper.m_SpaceActionsCallbackInterface.OnSpaceMove;
                 @SpaceMove.canceled -= m_Wrapper.m_SpaceActionsCallbackInterface.OnSpaceMove;
+                @InteractPad.started -= m_Wrapper.m_SpaceActionsCallbackInterface.OnInteractPad;
+                @InteractPad.performed -= m_Wrapper.m_SpaceActionsCallbackInterface.OnInteractPad;
+                @InteractPad.canceled -= m_Wrapper.m_SpaceActionsCallbackInterface.OnInteractPad;
                 @Pause.started -= m_Wrapper.m_SpaceActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_SpaceActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_SpaceActionsCallbackInterface.OnPause;
@@ -966,6 +1002,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @SpaceMove.started += instance.OnSpaceMove;
                 @SpaceMove.performed += instance.OnSpaceMove;
                 @SpaceMove.canceled += instance.OnSpaceMove;
+                @InteractPad.started += instance.OnInteractPad;
+                @InteractPad.performed += instance.OnInteractPad;
+                @InteractPad.canceled += instance.OnInteractPad;
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
@@ -1023,6 +1062,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     public interface ISpaceActions
     {
         void OnSpaceMove(InputAction.CallbackContext context);
+        void OnInteractPad(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }

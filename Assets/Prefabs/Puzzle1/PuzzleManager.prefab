@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lines: 5
   columns: 5
-  tilePrefab: {fileID: 1695954771483188850, guid: 3b50538fbf5b5e149bf55112f7d59fe0, type: 3}
+  tilePrefab: {fileID: 5793137686503233526, guid: 56a3c573c4a0d55499f6b88bd8dcd69d, type: 3}
   speed: 2
   intervalToSelect: 0.2
   interval: 0.05
@@ -59,6 +59,7 @@ MonoBehaviour:
   - {x: 4, y: 0}
   - {x: 4, y: 1}
   - {x: 4, y: 2}
+  container: {fileID: 0}
 --- !u!114 &4826707624952705002
 MonoBehaviour:
   m_ObjectHideFlags: 0

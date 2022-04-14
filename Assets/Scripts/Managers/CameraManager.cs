@@ -13,7 +13,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera antenaCam;
 
     bool isPlayerCam = true;
-
+    CinemachineVirtualCamera actualCam;
     private void Awake()
     {
         //if(Instance == null)
@@ -52,8 +52,21 @@ public class CameraManager : MonoBehaviour
 
     public void ChangeCamera(bool isPanelCam, bool entering)
     {
+        if (actualCam != null)
+            actualCam.gameObject.SetActive(false);
         playerCam.gameObject.SetActive(!entering);
         panelCam.gameObject.SetActive(isPanelCam && entering);
         antenaCam.gameObject.SetActive(!isPanelCam && entering);
+    }
+
+    public void ChangeCamera(CinemachineVirtualCamera camera)
+    {
+        if (actualCam != null)
+            actualCam.gameObject.SetActive(false);
+        playerCam.gameObject.SetActive(false);
+        panelCam.gameObject.SetActive(false);
+        antenaCam.gameObject.SetActive(false);
+        actualCam = camera;
+        camera.gameObject.SetActive(true);
     }
 }

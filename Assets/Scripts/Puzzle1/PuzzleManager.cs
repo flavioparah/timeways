@@ -26,6 +26,8 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] InputReader inputReader;
     [SerializeField] List<Vector2> blockedTiles = new List<Vector2>();
     [SerializeField] Transform container;
+    [SerializeField] GameObject lockedImage;
+    [SerializeField] GameObject unlockedImage;
 
     float time;
     bool moving;
@@ -44,15 +46,19 @@ public class PuzzleManager : MonoBehaviour
     bool reversing;
     int movesQuantity;
     bool victory;
+
+    bool puzzleOn;
+
+    Coroutine currentCoroutine;
     // Start is called before the first frame update
     void Start()
     {
-        CreatePuzzle();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!puzzleOn) return;
         Debug.Log(movement);
         time += Time.deltaTime;
         if (firstSelected)
@@ -188,14 +194,30 @@ public class PuzzleManager : MonoBehaviour
         }
         if (aux == tiles.Count)
         {
-            victory = true;
-            tiles.ForEach(t => t.TurnOnGreen());
+            SetVictory();
+
+            TurnScreenOff();
+            CameraManager.Instance.ChangeCamera(true, true);
+            this.GetComponentInParent<SolarPanel>().SetPuzzleComplete(this);
         }
 
 
 
         return blockedDirections >= 4;
 
+    }
+
+    public void SetVictory()
+    {
+        victory = true;
+        tiles.ForEach(t => t.TurnOnGreen());
+        lockedImage.SetActive(false);
+        unlockedImage.SetActive(true);
+    }
+
+    public bool IsComplete()
+    {
+        return victory;
     }
     void TurnOnCurrentTile()
     {
@@ -332,6 +354,79 @@ public class PuzzleManager : MonoBehaviour
         currentTile.TurnOnYellow();
     }
 
+    public void TurnPuzzleOn()
+    {
+        if (currentCoroutine != null) StopCoroutine(currentCoroutine);
+        currentCoroutine = StartCoroutine(TogglingPuzzle());
+
+    }
+
+    public void TurnScreenOn()
+    {
+        if (currentCoroutine != null) StopCoroutine(currentCoroutine);
+        currentCoroutine = StartCoroutine(TogglingScreen(true));
+    }
+
+    public void TurnScreenOff()
+    {
+        if (currentCoroutine != null) StopCoroutine(currentCoroutine);
+        currentCoroutine = StartCoroutine(TogglingScreen(false));
+    }
+
+    IEnumerator TogglingPuzzle()
+    {
+        float i = 0;
+        float j = 0;
+        foreach (Transform tile in container)
+        {
+            PuzzleTile t = tile.GetComponent<PuzzleTile>();
+            t.TurnOffLight();
+            Vector2 newPos = new Vector2(i, j);
+            if (!puzzleOn)
+            {
+                tiles.Add(t);
+
+                tilePositions.Add(newPos, t);
+            }
+
+
+            if (blockedTiles.Contains(newPos))
+            {
+                t.Block();
+            }
+
+            j++;
+            if (j > 4)
+            {
+                i++;
+                j = 0;
+            }
+
+            yield return new WaitForSeconds(.02f);
+        }
+
+        currentPosition = Vector2.zero;
+        currentTile = tilePositions[currentPosition];
+        currentTile.TurnOnYellow();
+        puzzleOn = true;
+    }
+    IEnumerator TogglingScreen(bool isOn)
+    {
+        foreach (Transform tile in container)
+        {
+            PuzzleTile t = tile.GetComponent<PuzzleTile>();
+            if (isOn)
+                t.TurnOnYellow();
+            else
+                t.TurnOffLight();
+            yield return new WaitForSeconds(.03f);
+        }
+
+        //if(!isOn)
+        //{
+        //    puzzleOn = false;
+        //}
+    }
     private void OnEnable()
     {
         if (inputReader != null)
@@ -359,6 +454,8 @@ public class PuzzleManager : MonoBehaviour
     }
     private void Movement(Vector2 move)
     {
+
+        if (!puzzleOn) return;
         if (move != Vector2.right && move != Vector2.left && move != Vector2.down && move != Vector2.up) return;
         if (firstSelected)
         {
@@ -386,7 +483,7 @@ public class PuzzleManager : MonoBehaviour
 
     void Interact()
     {
-
+        if (!puzzleOn) return;
         if (firstSelected && !selectedDirection && !reversing)
         {
             reversing = true;

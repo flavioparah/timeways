@@ -55,7 +55,6 @@ public class Wave : MonoBehaviour
     {
         List<Vector3> positionsList = new List<Vector3>();
         float x = 200;
-        Debug.Log(points);
         for (int i = 0; i < points; i++)
         {
             Vector3 p = new Vector3(x, GetY(x));

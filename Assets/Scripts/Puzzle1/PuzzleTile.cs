@@ -15,6 +15,7 @@ public class PuzzleTile : MonoBehaviour
     private void Awake()
     {
         light = this.transform.GetChild(0).GetComponent<Light2D>();
+        light.pointLightOuterRadius = .015f;
         TurnOffLight();
 
     }

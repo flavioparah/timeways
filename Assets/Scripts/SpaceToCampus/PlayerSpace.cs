@@ -20,7 +20,6 @@ public class PlayerSpace : MonoBehaviour
     //[SerializeField] float maxSizeBone;
     [SerializeField] Pad pad;
     Panel panel;
-
     InputReader inputReader;
     Rigidbody2D rb;
     Vector2 direction;
@@ -46,6 +45,9 @@ public class PlayerSpace : MonoBehaviour
     Transform solarPoint;
     bool waitingAnimation;
 
+    [SerializeField] WavePanel wavePanel;
+    [SerializeField] Antenna antennaManager;
+    bool isOnWavePanel;
     Coroutine movingCoroutine;
     private void Awake()
     {
@@ -84,6 +86,12 @@ public class PlayerSpace : MonoBehaviour
     {
         if (waitingAnimation) return;
         if (onPanel) return;
+        if (isOnWavePanel)
+        {
+            if(padInteracting)
+                wavePanel.ChangeValue(direction);
+            return;
+        }
         if (direction != Vector2.zero)
         {
             if (Quaternion.Angle(transform.rotation, Quaternion.LookRotation(Vector3.forward, direction)) < 1)
@@ -135,6 +143,18 @@ public class PlayerSpace : MonoBehaviour
             MoveOnPanel();
             return;
         }
+
+        if (isOnWavePanel)
+        {
+            if (padInteracting)
+            {
+                
+                return;
+            }
+            MoveOnAntennaPuzzle();
+            return;
+        }
+
         isParticleOn = true;
 
         if (Quaternion.Angle(transform.rotation, Quaternion.LookRotation(Vector3.forward, direction)) > 1)
@@ -183,6 +203,12 @@ public class PlayerSpace : MonoBehaviour
             CameraManager.Instance.ChangeCamera(solarPoint.Find("puzzleCam").GetComponent<CinemachineVirtualCamera>());
             StartCoroutine(HidingPlayer());
         }
+
+        if(isOnWavePanel)
+        {
+            if (onPuzzle) return;
+            InteractPad();
+        }
         //if (solarPanel != null)
         //{
         //    solarPanel.Access();
@@ -191,6 +217,7 @@ public class PlayerSpace : MonoBehaviour
 
     void Pause()
     {
+        if (isOnWavePanel) return;
         if (onPuzzle)
         {
             solarPoint.GetComponentInChildren<PuzzleManager>().TurnScreenOff();
@@ -202,7 +229,20 @@ public class PlayerSpace : MonoBehaviour
 
     void InteractPad()
     {
+        if(isOnWavePanel)
+        {
+            if (onPuzzle) return;
+            if (antennaManager.PuzzleComplete()) return;
 
+            pad.OpenPad(wavePanel);
+
+            padInteracting = true;
+            antennaManager.OpenPuzzle(wavePanel);
+            onPuzzle = true;
+            return;
+          //  CameraManager.Instance.ChangeCamera(solarPoint.Find("puzzleCam").GetComponent<CinemachineVirtualCamera>());
+           // StartCoroutine(HidingPlayer());
+        }
 
         if (padInteracting)
         {
@@ -254,8 +294,15 @@ public class PlayerSpace : MonoBehaviour
 
         if (collision.tag == "Antenna")
         {
-            solarPanel = collision.GetComponent<SolarPanel>();
-            CameraManager.Instance.ChangeCamera(true, true);
+            isOnWavePanel = true;
+            GoToAntennaPoint(false);
+
+        }
+
+        if (collision.tag == "AntennaBase")
+        {
+            isOnWavePanel = true;
+            GoToAntennaPoint(true);
         }
     }
 
@@ -268,11 +315,16 @@ public class PlayerSpace : MonoBehaviour
         //    CameraManager.Instance.ChangeCamera(false, false);
         //}
 
-        if (collision.tag == "Antenna")
-        {
-            solarPanel = null;
-            CameraManager.Instance.ChangeCamera(false, false);
-        }
+        //if (collision.tag == "Antenna")
+        //{
+        //    isOnWavePanel = false;
+        //    CameraManager.Instance.ChangeCamera(false, false);
+        //}
+        //if (collision.tag == "AntennaBase")
+        //{
+        //    isOnWavePanel = false;
+        //    CameraManager.Instance.ChangeCamera(false, false);
+        //}
     }
 
     void GoToPanelPoint()
@@ -335,7 +387,8 @@ public class PlayerSpace : MonoBehaviour
             {
                 transform.position = finalPos;
                 transform.up = point.up;
-                solarPoint.GetComponentInChildren<PuzzleManager>().TurnScreenOn();
+                if (onPanel)
+                    solarPoint.GetComponentInChildren<PuzzleManager>().TurnScreenOn();
 
                 particlesToRight.SetActive(false);
 
@@ -397,5 +450,46 @@ public class PlayerSpace : MonoBehaviour
     public void SetWaitingState(bool isWaiting)
     {
         waitingAnimation = isWaiting;
+    }
+
+    //--------------------Antenna-------------------
+
+    void GoToAntennaPoint(bool isBase)
+    {
+        TurnRight();
+        isOnWavePanel = true;
+        rb.velocity = Vector3.zero;
+        Transform antennaPoint = isBase ? antennaManager.GetBasePoint() : antennaManager.GetAntennaPoint();
+
+
+        if (movingCoroutine != null)
+            StopCoroutine(movingCoroutine);
+        movingCoroutine = StartCoroutine(GointToPoint(antennaPoint));
+    }
+
+    void MoveOnAntennaPuzzle()
+    {
+        if (waitingAnimation) return;
+
+
+
+        bool newPointSelected = false;
+
+        if (movingDown || movingLeft)
+            newPointSelected = antennaManager.GetPreviousPoint();
+
+        else if (movingRight || movingUp)
+            newPointSelected = antennaManager.GetNextPoint();
+
+        if (newPointSelected)
+        {
+
+            return;
+        }
+
+
+        isOnWavePanel = false;
+        Move(direction);
+        CameraManager.Instance.ChangeCamera(false, false);
     }
 }

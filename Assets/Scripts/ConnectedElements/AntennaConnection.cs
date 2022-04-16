@@ -5,32 +5,28 @@ using UnityEngine.UI;
 
 public class AntennaConnection : Connection
 {
-    WavePanel wavePanel;
+    [SerializeField] WavePanel wavePanel;
     [SerializeField] CanvasGroup waveImage;
+    [SerializeField] Slider periodSlide;
+    [SerializeField] Slider amplitudeSlide;
     public override void Hide()
     {
-        throw new System.NotImplementedException();
+        waveImage.alpha = 0;
     }
 
     public override void PerformAction()
     {
-        throw new System.NotImplementedException();
+       //
     }
 
     public override void Show(Panel panel = null)
     {
-        throw new System.NotImplementedException();
+        waveImage.alpha = 1;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void Slider()
     {
-        
+        //wavePanel.ChangeValue(new Vector2(ampl))
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }

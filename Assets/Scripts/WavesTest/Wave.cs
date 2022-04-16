@@ -16,6 +16,14 @@ public class Wave : MonoBehaviour
     Wave mainWave;
 
     float time;
+
+    float amplitudeTime;
+    float periodTime;
+    float amplitudeInterval;
+    float periodInterval;
+
+    bool periodBlocked;
+    bool amplitudeBlocked;
     Vector3[] positions;
     LineRenderer wave;
 
@@ -27,17 +35,29 @@ public class Wave : MonoBehaviour
         {
             mainWave = this.transform.parent.Find("MainWave").GetComponent<Wave>();
         }
-
+        amplitudeInterval = 0f;
+        periodInterval = .05f;
+        periodBlocked = false;
+        amplitudeBlocked = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         time += Time.deltaTime * speed;
-        //if(time >= amplitude)
-        //{
-        //    time = 0;
-        //}
+        amplitudeTime += Time.deltaTime;
+        periodTime += Time.deltaTime;
+        if (periodTime >= periodInterval)
+        {
+
+            periodBlocked = false;
+        }
+
+        if (amplitudeTime >= amplitudeInterval)
+        {
+
+            amplitudeBlocked = false;
+        }
         CreatePoints();
         Senoid();
 
@@ -96,14 +116,22 @@ public class Wave : MonoBehaviour
 
     public void SetPeriod(bool increasing)
     {
+        if (periodBlocked) return;
         if (isMainWave) return;
         period += (increasing ? incSpeed : -incSpeed);
+        period = Mathf.Clamp(period, -5, 5);
+        periodBlocked = true;
+        periodTime = 0;
     }
 
     public void SetAmplitude(bool increasing)
     {
+        if (amplitudeBlocked) return;
         if (isMainWave) return;
         amplitude += (increasing ? incSpeed : -incSpeed);
+        amplitude = Mathf.Clamp(amplitude, -10, 10);
+        amplitudeBlocked = true;
+        amplitudeTime = 0;
     }
 
     public void CheckWaves()
@@ -113,7 +141,7 @@ public class Wave : MonoBehaviour
         float a = mainWave.GetAmplitude();
         float s = mainWave.GetSpeed();
         float factor = .05f;
-        if (period > p - factor && period < p - factor)
+        if (period > p - factor && period < p + factor)
         {
             if (amplitude > a - factor && amplitude < a + factor)
             {

@@ -25,6 +25,7 @@ public class PadScreen : MonoBehaviour
     [SerializeField] DoorConnection doorConnection;
     [SerializeField] ElevatorConnection elevatorConnection;
     [SerializeField] UlisesConnection ulisesConnection;
+    [SerializeField] AntennaConnection antennaConnection;
 
     [SerializeField] float speedBg;
     [SerializeField] float speedBtn;
@@ -93,9 +94,9 @@ public class PadScreen : MonoBehaviour
 
         else if (panel.GetConnection() == Enums.Connection.antenna)
         {
-            actualBg = elevatorConnection.GetBG();
-            elevatorConnection.Show(panel);
-            connection = elevatorConnection;
+            actualBg = antennaConnection.GetBG();
+            antennaConnection.Show(panel);
+            connection = antennaConnection;
         }
 
         connectionTab.GetComponent<Button>().interactable = false;

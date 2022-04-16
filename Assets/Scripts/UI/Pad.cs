@@ -60,7 +60,8 @@ public class Pad : MonoBehaviour
 
     public void GrantPlayerAccess()
     {
-        player.GrantPadAccess();
+        if (player != null)
+            player.GrantPadAccess();
     }
 
 

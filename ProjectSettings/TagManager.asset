@@ -30,6 +30,8 @@ TagManager:
   - ZoomOut
   - SolarPanel
   - ExitHatch
+  - AntennaBase
+  - Antenna
   layers:
   - Default
   - TransparentFX

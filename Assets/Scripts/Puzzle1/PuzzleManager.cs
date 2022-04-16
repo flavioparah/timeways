@@ -53,11 +53,13 @@ public class PuzzleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PuzzleSetUp();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (victory) return;
         if (!puzzleOn) return;
         Debug.Log(movement);
         time += Time.deltaTime;
@@ -356,6 +358,7 @@ public class PuzzleManager : MonoBehaviour
 
     public void TurnPuzzleOn()
     {
+        if (victory) return;
         if (currentCoroutine != null) StopCoroutine(currentCoroutine);
         currentCoroutine = StartCoroutine(TogglingPuzzle());
 
@@ -363,12 +366,14 @@ public class PuzzleManager : MonoBehaviour
 
     public void TurnScreenOn()
     {
+        if (victory) return;
         if (currentCoroutine != null) StopCoroutine(currentCoroutine);
         currentCoroutine = StartCoroutine(TogglingScreen(true));
     }
 
     public void TurnScreenOff()
     {
+        if (victory) return;
         if (currentCoroutine != null) StopCoroutine(currentCoroutine);
         currentCoroutine = StartCoroutine(TogglingScreen(false));
     }
@@ -377,17 +382,11 @@ public class PuzzleManager : MonoBehaviour
     {
         float i = 0;
         float j = 0;
-        foreach (Transform tile in container)
+        foreach (PuzzleTile t in tilePositions.Values)
         {
-            PuzzleTile t = tile.GetComponent<PuzzleTile>();
+           
             t.TurnOffLight();
             Vector2 newPos = new Vector2(i, j);
-            if (!puzzleOn)
-            {
-                tiles.Add(t);
-
-                tilePositions.Add(newPos, t);
-            }
 
 
             if (blockedTiles.Contains(newPos))
@@ -422,10 +421,33 @@ public class PuzzleManager : MonoBehaviour
             yield return new WaitForSeconds(.03f);
         }
 
-        //if(!isOn)
-        //{
-        //    puzzleOn = false;
-        //}
+        if (!isOn)
+        {
+            puzzleOn = false;
+        }
+    }
+
+    void PuzzleSetUp()
+    {
+        float i = 0;
+        float j = 0;
+        foreach (Transform tile in container)
+        {
+            PuzzleTile t = tile.GetComponent<PuzzleTile>();
+            t.TurnOffLight();
+            Vector2 newPos = new Vector2(i, j);
+
+            tiles.Add(t);
+
+            tilePositions.Add(newPos, t);
+
+            j++;
+            if (j > 4)
+            {
+                i++;
+                j = 0;
+            }
+        }
     }
     private void OnEnable()
     {

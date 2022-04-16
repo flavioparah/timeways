@@ -167,12 +167,14 @@ public class SolarPanel : MonoBehaviour
     }
     IEnumerator OpeningPanels(List<Animator> anims)
     {
+        player.SetWaitingState(true);
         foreach (Animator a in anims)
         {
             a.SetTrigger("Open");
             yield return new WaitForSeconds(Random.Range(.3f, .5f));
         }
 
+        player.SetWaitingState(false);
         CameraManager.Instance.ChangeCamera(false, false);
     }
 }

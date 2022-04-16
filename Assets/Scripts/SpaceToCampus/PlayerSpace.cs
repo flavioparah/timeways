@@ -44,6 +44,7 @@ public class PlayerSpace : MonoBehaviour
     bool onPanel;
     bool onPuzzle;
     Transform solarPoint;
+    bool waitingAnimation;
 
     Coroutine movingCoroutine;
     private void Awake()
@@ -81,6 +82,7 @@ public class PlayerSpace : MonoBehaviour
 
     private void Update()
     {
+        if (waitingAnimation) return;
         if (onPanel) return;
         if (direction != Vector2.zero)
         {
@@ -289,6 +291,7 @@ public class PlayerSpace : MonoBehaviour
 
     void MoveOnPanel()
     {
+        if (waitingAnimation) return;
         solarPoint.GetComponentInChildren<PuzzleManager>().TurnScreenOff();
         Transform newPoint = solarPoint;
 
@@ -317,6 +320,7 @@ public class PlayerSpace : MonoBehaviour
 
     IEnumerator GointToPoint(Transform point)
     {
+        particlesToRight.SetActive(true);
         float factor = 0;
 
         Vector2 startPos = transform.position;
@@ -332,6 +336,8 @@ public class PlayerSpace : MonoBehaviour
                 transform.position = finalPos;
                 transform.up = point.up;
                 solarPoint.GetComponentInChildren<PuzzleManager>().TurnScreenOn();
+
+                particlesToRight.SetActive(false);
 
             }
             yield return null;
@@ -386,5 +392,10 @@ public class PlayerSpace : MonoBehaviour
     {
         onPuzzle = false;
         StartCoroutine(ShowingPlayer());
+    }
+
+    public void SetWaitingState(bool isWaiting)
+    {
+        waitingAnimation = isWaiting;
     }
 }

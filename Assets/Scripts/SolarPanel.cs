@@ -82,6 +82,7 @@ public class SolarPanel : MonoBehaviour
         this.GetComponent<Collider2D>().enabled = false;
         CameraManager.Instance.ChangeCamera(solarPanelCam);
         StartCoroutine(OpeningPanels(anims));
+        GameManager.Instance.SaveSolarPuzzle();
     }
 
     void SetSolarPanelOpen()
@@ -175,6 +176,7 @@ public class SolarPanel : MonoBehaviour
         }
 
         player.SetWaitingState(false);
+        player.ObjectiveCompleted(false);
         CameraManager.Instance.ChangeCamera(false, false);
     }
 }

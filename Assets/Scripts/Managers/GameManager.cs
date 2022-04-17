@@ -214,7 +214,6 @@ public class GameManager : MonoBehaviour
     }
     public void ToggleFullScreen(bool isFull)
     {
-        Debug.Log("full screen" + isFull);
         isFullScreen = isFull;
         Screen.fullScreen = isFullScreen;
         if (isFullScreen) Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
@@ -231,5 +230,29 @@ public class GameManager : MonoBehaviour
     public string GetSceneName()
     {
         return SceneManager.GetActiveScene().name;
+    }
+
+    public void OnLevelWasLoaded(int level)
+    {
+        
+    }
+    public bool IsAntenaPuzzleCompleted()
+    {
+        return PlayerPrefs.GetInt("AntennaPuzzle", 0) == 1;
+    }
+
+    public void SaveAntennaPuzzle()
+    {
+        PlayerPrefs.SetInt("AntennaPuzzle", 1);
+    }
+
+    public bool IsSolarPuzzleCompleted()
+    {
+        return PlayerPrefs.GetInt("SolarPuzzle", 0) == 1;
+    }
+
+    public void SaveSolarPuzzle()
+    {
+        PlayerPrefs.SetInt("SolarPuzzle", 1);
     }
 }

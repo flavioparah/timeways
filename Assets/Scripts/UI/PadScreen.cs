@@ -50,6 +50,8 @@ public class PadScreen : MonoBehaviour
     Connection connection;
     Connection container;
 
+    bool specialConnection;
+    bool levelComplete;
     #endregion
 
     void Start()
@@ -97,6 +99,7 @@ public class PadScreen : MonoBehaviour
             actualBg = antennaConnection.GetBG();
             antennaConnection.Show(panel);
             connection = antennaConnection;
+            specialConnection = true;
         }
 
         connectionTab.GetComponent<Button>().interactable = false;
@@ -112,6 +115,7 @@ public class PadScreen : MonoBehaviour
     public void HidePad()
     {
         pad.ClosePad();
+        if (levelComplete) GameManager.Instance.EndLevel();
     }
 
 
@@ -166,7 +170,7 @@ public class PadScreen : MonoBehaviour
                     StartCoroutine(ToggleButton(true));
                     startButtonAnimation = true;
                 }
-                if (!startTabsAnimation && factor >= .82f)
+                if (!startTabsAnimation && factor >= .82f && !specialConnection)
                 {
                     StartCoroutine(ToggleTabs(true));
                     startTabsAnimation = true;
@@ -197,7 +201,7 @@ public class PadScreen : MonoBehaviour
                     StartCoroutine(ToggleButton(false));
                     startButtonAnimation = true;
                 }
-                if (!startTabsAnimation && factor >= .82f)
+                if (!startTabsAnimation && factor >= .82f && !specialConnection)
                 {
                     StartCoroutine(ToggleTabs(false));
                     startTabsAnimation = true;
@@ -211,6 +215,7 @@ public class PadScreen : MonoBehaviour
                 yield return null;
             }
             HidePad();
+            specialConnection = false;
         }
 
 
@@ -390,4 +395,10 @@ public class PadScreen : MonoBehaviour
         if (screenOpened)
             EventSystem.current.SetSelectedGameObject(mapTab.gameObject);
     }
+
+    public void SetLevelComplete()
+    {
+        levelComplete = true;
+    }
+
 }

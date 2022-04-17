@@ -6,6 +6,7 @@ public class WavePuzzleManager : MonoBehaviour
 {
     [SerializeField] Wave wave;
     bool isComplete;
+    WavePanel panel;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +23,20 @@ public class WavePuzzleManager : MonoBehaviour
     {
         isComplete = true;
     }
+
+    public void CompletePuzzle()
+    {
+        isComplete = true;
+        panel.SetPuzzleComplete(this);
+    }
     public bool IsComplete()
     {
         return isComplete;
     }
+
+    public void SetWavePanel(WavePanel wavePanel)
+    {
+        panel = wavePanel;
+    }
+
 }

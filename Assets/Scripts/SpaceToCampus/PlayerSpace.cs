@@ -13,7 +13,7 @@ public class PlayerSpace : MonoBehaviour
     [SerializeField] Transform antenna;
     [SerializeField] Sprite turningSprite;
     [SerializeField] Sprite initialSprite;
-
+    [SerializeField] UlisesConnection ulisesConnection;
     //[SerializeField] float minSizePlayer;
     //[SerializeField] float maxSizePlayer;
     //[SerializeField] float minSizeBone;
@@ -47,6 +47,8 @@ public class PlayerSpace : MonoBehaviour
 
     [SerializeField] WavePanel wavePanel;
     [SerializeField] Antenna antennaManager;
+
+    WavePuzzleManager antennaPoint;
     bool isOnWavePanel;
     Coroutine movingCoroutine;
     private void Awake()
@@ -88,7 +90,7 @@ public class PlayerSpace : MonoBehaviour
         if (onPanel) return;
         if (isOnWavePanel)
         {
-            if(padInteracting)
+            if (padInteracting)
                 wavePanel.ChangeValue(direction);
             return;
         }
@@ -148,7 +150,7 @@ public class PlayerSpace : MonoBehaviour
         {
             if (padInteracting)
             {
-                
+
                 return;
             }
             MoveOnAntennaPuzzle();
@@ -204,7 +206,7 @@ public class PlayerSpace : MonoBehaviour
             StartCoroutine(HidingPlayer());
         }
 
-        if(isOnWavePanel)
+        if (isOnWavePanel)
         {
             if (onPuzzle) return;
             InteractPad();
@@ -217,9 +219,15 @@ public class PlayerSpace : MonoBehaviour
 
     void Pause()
     {
-        if (isOnWavePanel) return;
+
         if (onPuzzle)
         {
+            if (isOnWavePanel)
+            {
+                pad.ClosePadScreen();
+                return;
+            }
+
             solarPoint.GetComponentInChildren<PuzzleManager>().TurnScreenOff();
             CameraManager.Instance.ChangeCamera(true, true);
             Show();
@@ -229,10 +237,14 @@ public class PlayerSpace : MonoBehaviour
 
     void InteractPad()
     {
-        if(isOnWavePanel)
+        if (isOnWavePanel)
         {
-            if (onPuzzle) return;
-            if (antennaManager.PuzzleComplete()) return;
+            if (onPuzzle)
+            {
+                pad.ClosePadScreen();
+                return;
+            }
+            if (antennaManager.PuzzleComplete(antennaPoint)) return;
 
             pad.OpenPad(wavePanel);
 
@@ -240,8 +252,8 @@ public class PlayerSpace : MonoBehaviour
             antennaManager.OpenPuzzle(wavePanel);
             onPuzzle = true;
             return;
-          //  CameraManager.Instance.ChangeCamera(solarPoint.Find("puzzleCam").GetComponent<CinemachineVirtualCamera>());
-           // StartCoroutine(HidingPlayer());
+            //  CameraManager.Instance.ChangeCamera(solarPoint.Find("puzzleCam").GetComponent<CinemachineVirtualCamera>());
+            // StartCoroutine(HidingPlayer());
         }
 
         if (padInteracting)
@@ -256,6 +268,11 @@ public class PlayerSpace : MonoBehaviour
 
     }
 
+    public void ClosePad()
+    {
+        padInteracting = false;
+        onPuzzle = false;
+    }
     void TurnLeft()
     {
         particles.SetActive(false);
@@ -452,6 +469,13 @@ public class PlayerSpace : MonoBehaviour
         waitingAnimation = isWaiting;
     }
 
+    public void ObjectiveCompleted(bool isAntenna)
+    {
+        if (isAntenna) ulisesConnection.Objective1Complete();
+        else ulisesConnection.Objective2Complete();
+
+        InteractPad();
+    }
     //--------------------Antenna-------------------
 
     void GoToAntennaPoint(bool isBase)
@@ -461,6 +485,7 @@ public class PlayerSpace : MonoBehaviour
         rb.velocity = Vector3.zero;
         Transform antennaPoint = isBase ? antennaManager.GetBasePoint() : antennaManager.GetAntennaPoint();
 
+        this.antennaPoint = antennaManager.GetCurrentPuzzle();
 
         if (movingCoroutine != null)
             StopCoroutine(movingCoroutine);
@@ -476,10 +501,18 @@ public class PlayerSpace : MonoBehaviour
         bool newPointSelected = false;
 
         if (movingDown || movingLeft)
-            newPointSelected = antennaManager.GetPreviousPoint();
+        {
+            newPointSelected = antennaManager.GetPreviousPoint(antennaPoint);
+            antennaPoint = antennaManager.GetCurrentPuzzle();
+        }
+
 
         else if (movingRight || movingUp)
-            newPointSelected = antennaManager.GetNextPoint();
+        {
+            newPointSelected = antennaManager.GetNextPoint(antennaPoint);
+            antennaPoint = antennaManager.GetCurrentPuzzle();
+        }
+
 
         if (newPointSelected)
         {
@@ -488,8 +521,22 @@ public class PlayerSpace : MonoBehaviour
         }
 
 
+        LeaveWavePanel();
+    }
+
+    public void LeaveWavePanel()
+    {
         isOnWavePanel = false;
         Move(direction);
         CameraManager.Instance.ChangeCamera(false, false);
+    }
+
+    public void SetWavePuzzle(WavePuzzleManager puzzle)
+    {
+        antennaPoint = puzzle;
+    }
+    public void LeavePuzzle()
+    {
+        onPuzzle = false;
     }
 }

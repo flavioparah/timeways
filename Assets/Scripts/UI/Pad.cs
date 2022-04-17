@@ -10,6 +10,7 @@ public class Pad : MonoBehaviour
     [SerializeField] PadScreen padScreen;
     [SerializeField] Player player;
     [SerializeField] bool isOutside;
+    [SerializeField] PlayerSpace playerSpace;
     #endregion
 
     #region Members
@@ -33,6 +34,7 @@ public class Pad : MonoBehaviour
     private void Start()
     {
         anim = this.GetComponent<Animator>();
+        
     }
     public void OpenPad(Panel panel)
     {
@@ -49,6 +51,11 @@ public class Pad : MonoBehaviour
     {
         padClosed?.Invoke();
         anim.SetBool("OpenPad", false);
+        if(isOutside)
+        {
+            playerSpace.ClosePad();
+            return;
+        }
         player.ClosePad();
     }
 

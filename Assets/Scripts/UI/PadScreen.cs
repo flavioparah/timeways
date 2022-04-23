@@ -311,6 +311,7 @@ public class PadScreen : MonoBehaviour
         {
             if (actualScreen == Enums.Screen.connection) connection.Show();
             else container.Show();
+
             background.fillAmount = 0;
 
             while (factor < 1)

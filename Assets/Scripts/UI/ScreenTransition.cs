@@ -13,7 +13,10 @@ public class ScreenTransition : MonoBehaviour
     [SerializeField] private Image fadeImage;
     [SerializeField] private float fadeSpeed = 5f;
     // [SerializeField] private List<Color> colors = new List<Color>();
+    [SerializeField] TextMeshProUGUI dayText;
+    [SerializeField] TextMeshProUGUI dayTextNumber;
     [SerializeField] TextMeshProUGUI levelText;
+    [SerializeField] List<TextMeshProUGUI> levelTexts = new List<TextMeshProUGUI>();
     #endregion
 
     #region Members
@@ -72,6 +75,10 @@ public class ScreenTransition : MonoBehaviour
                 if (!onGame)
                     OnComplete?.Invoke();
 
+                if (fadeTarget == 0)
+                {
+                    ToggleLevelText(false);
+                }
             }
         }
     }
@@ -111,14 +118,32 @@ public class ScreenTransition : MonoBehaviour
 
     public void SetLevelText(int levelNumber)
     {
+        int day = levelNumber;
+        switch (day)
+        {
+            case 2:
+                day = 1;
+                levelNumber = 0;
+                break;
 
-        // levelText.text = string.Format("Level {0}", levelNumber);
+            case 3:
+                day = 26;
+                break;
+        
+        }
+
+        dayTextNumber.text =  " "+ day.ToString();
+        levelText.gameObject.SetActive(false);
+        levelText = levelTexts[levelNumber];
+        levelText.gameObject.SetActive(true);
     }
 
     public void ToggleLevelText(bool isOn)
     {
 
         levelText.gameObject.SetActive(isOn);
+        dayText.gameObject.SetActive(isOn);
+        dayTextNumber.gameObject.SetActive(isOn);
     }
 
     public bool isFading()

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
+
 public class UlisesConnection : Connection
 {
     [SerializeField] GameObject loading;
@@ -30,6 +32,8 @@ public class UlisesConnection : Connection
     public override void Show(Panel panel = null)
     {
         anim.SetTrigger("Open");
+
+        EventSystem.current.SetSelectedGameObject(padScreen.GetButtonToNavigate().gameObject);
     }
 
     public override void PerformAction()

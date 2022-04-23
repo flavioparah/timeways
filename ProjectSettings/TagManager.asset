@@ -81,6 +81,9 @@ TagManager:
   - name: ForeGround
     uniqueID: 100130739
     locked: 0
+  - name: AntennaInArrival
+    uniqueID: 2443881749
+    locked: 0
   - name: Explosion
     uniqueID: 1579493499
     locked: 0

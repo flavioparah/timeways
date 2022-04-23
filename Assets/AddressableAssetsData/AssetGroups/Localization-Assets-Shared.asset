@@ -37,6 +37,14 @@ MonoBehaviour:
     m_Address: Assets/Localization/UlisesConnection Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: 488a82757b77e6f4d94d0864641d9e40
+    m_Address: Assets/Localization/OpeningTexts Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: a480e31c260f39a42952e307869e09b6
+    m_Address: Assets/Localization/DayTexts Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: aecceacde85931140a4ac52cfe2e6a5d, type: 2}
   m_SchemaSet:

@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public static int shipState;
 
     public static bool isMainMenu;
+    public static bool playingCutscene;
 
     bool waiting;
     int scene;
@@ -108,6 +109,14 @@ public class GameManager : MonoBehaviour
         scene++;
 
         SceneManager.LoadScene(scene);
+    }
+    public void EndCutscene()
+    {
+        playingCutscene = true;
+        ScreenTransition.Instance.ToggleLevelText(true);
+        int day = scene;
+        ScreenTransition.Instance.SetLevelText(day);
+        EndLevel();
     }
 
     public void SetShipState(int number)

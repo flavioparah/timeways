@@ -33252,6 +33252,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 487321159}
+    - target: {fileID: 5438270830833031513, guid: 3d868866c9eef9141a6ca5faec6dffa3, type: 3}
+      propertyPath: DELETE_SAVES
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5438270830833031515, guid: 3d868866c9eef9141a6ca5faec6dffa3, type: 3}
       propertyPath: m_RootOrder
       value: 8

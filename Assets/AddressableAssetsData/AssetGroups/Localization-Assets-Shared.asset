@@ -45,6 +45,10 @@ MonoBehaviour:
     m_Address: Assets/Localization/DayTexts Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: 46bc56e3ad5aa4c43a2d6cdc0ac1d45c
+    m_Address: Assets/Localization/DoorConnection Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: aecceacde85931140a4ac52cfe2e6a5d, type: 2}
   m_SchemaSet:

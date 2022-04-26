@@ -25,6 +25,11 @@ public class DoorConnection : Connection
     [SerializeField] TextAnimation buttonText;
     [SerializeField] TextMeshProUGUI text;
 
+    [SerializeField] TextMeshProUGUI textOpenDoor;
+    [SerializeField] TextMeshProUGUI textCloseDoor;
+    [SerializeField] TextMeshProUGUI connectedText;
+    [SerializeField] TextMeshProUGUI connectionDeniedText;
+
     Color textInitialColor;
     Animator anim;
     bool doorToggled;
@@ -34,13 +39,15 @@ public class DoorConnection : Connection
 
     bool isOpenButton;
 
-
+    int protocol;
 
     public override void Show(Panel panel)
     {
         screenClosed = false;
         this.doorPanel = (DoorPanel)panel;
+        protocol = GameManager.Instance.GetProtocol();
         ShowButton();
+        
     }
     public void ToggleDoorButton()
     {
@@ -68,7 +75,8 @@ public class DoorConnection : Connection
     public void ShowButton()
     {
         isOpenButton = doorPanel.IsDoorClosed();
-        SetText();
+        int doorProtocol = doorPanel.GetDoorProtocol();
+        SetText(doorProtocol);
         if (isOpenButton) TypeOpenDoor();
         else TypeCloseDoor();
         this.btnEffectClosed.fillAmount = isOpenButton ? 1 : 0;
@@ -83,10 +91,15 @@ public class DoorConnection : Connection
     }
 
     #region Texts Methods
-    public void SetText()
+    public void SetText(int doorProtocol)
     {
+        
         string door = "";
-        door = "CONNECTED:" + doorPanel.GetDoorName().ToUpper();
+
+        if (protocol >= doorProtocol)
+            door = connectedText.text + doorPanel.GetDoorName().ToUpper();
+        else
+            door = connectionDeniedText.text;
         text.GetComponent<TextAnimation>().Type(door);
     }
 
@@ -98,12 +111,12 @@ public class DoorConnection : Connection
 
     public void TypeOpenDoor()
     {
-        buttonText.Type("OPEN \n DOOR");
+        buttonText.Type(textOpenDoor.text);
     }
 
     public void TypeCloseDoor()
     {
-        buttonText.Type("CLOSE \n DOOR");
+        buttonText.Type(textCloseDoor.text);
     }
 
     #endregion

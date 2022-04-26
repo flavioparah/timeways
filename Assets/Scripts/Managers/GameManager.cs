@@ -243,7 +243,7 @@ public class GameManager : MonoBehaviour
 
     public void OnLevelWasLoaded(int level)
     {
-        
+
     }
     public bool IsAntenaPuzzleCompleted()
     {
@@ -265,5 +265,14 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("SolarPuzzle", 1);
     }
 
-  
+    public int GetProtocol()
+    {
+        return PlayerPrefs.GetInt("protocol", 1);
+    }
+
+    public void SetProtocol(int protocol)
+    {
+        PlayerPrefs.SetInt("protocol", protocol);
+    }
+
 }

@@ -64,4 +64,9 @@ public class DoorPanel : Panel
     {
         return door.gameObject.name;
     }
+
+    public int GetDoorProtocol()
+    {
+        return door.GetProtocol();
+    }
 }

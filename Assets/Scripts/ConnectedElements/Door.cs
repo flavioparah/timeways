@@ -21,6 +21,8 @@ public class Door : MonoBehaviour
     [SerializeField] bool startClosed;
 
     public UnityAction<bool> doorClosed;
+
+    [SerializeField] int protocol; 
     // Start is called before the first frame update
     void Start()
     {
@@ -147,5 +149,10 @@ public class Door : MonoBehaviour
         {
             l.intensity = minBright;
         }
+    }
+
+    public int GetProtocol()
+    {
+        return protocol;
     }
 }

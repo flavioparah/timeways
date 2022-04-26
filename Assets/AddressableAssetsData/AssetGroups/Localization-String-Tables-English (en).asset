@@ -59,6 +59,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     - Preload
+  - m_GUID: 0082c1a849a6afd45897891b562eb67b
+    m_Address: DoorConnection_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: aecceacde85931140a4ac52cfe2e6a5d, type: 2}
   m_SchemaSet:

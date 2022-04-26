@@ -264,4 +264,6 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("SolarPuzzle", 1);
     }
+
+  
 }

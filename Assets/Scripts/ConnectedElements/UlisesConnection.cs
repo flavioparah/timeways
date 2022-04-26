@@ -21,8 +21,9 @@ public class UlisesConnection : Connection
     {
         base.Start();
         anim = this.GetComponent<Animator>();
-        SetObjectives();
-       // objective.fontStyle = FontStyles.Strikethrough;
+        if (GameManager.Instance.GetSceneName() == "Puzzles")
+            SetObjectives();
+        // objective.fontStyle = FontStyles.Strikethrough;
     }
     public override void Hide()
     {
@@ -63,7 +64,7 @@ public class UlisesConnection : Connection
     void CheckObjectives()
     {
         if (!isOutside) return;
-        if(objective1Completed && objective2Completed)
+        if (objective1Completed && objective2Completed)
         {
             padScreen.SetLevelComplete();
         }

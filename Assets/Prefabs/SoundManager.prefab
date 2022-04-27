@@ -129,7 +129,7 @@ MonoBehaviour:
     audioType: 10
     type: 22
     clipList:
-    - clip: {fileID: 8300000, guid: 9919c985ccf002c45849b7178c9077d6, type: 3}
+    - clip: {fileID: 8300000, guid: 6d3ae864b5867924abaa7f34ce290933, type: 3}
       group: {fileID: 4399096421049836176, guid: d6102a70a325bf2409a936b99795be67, type: 2}
     volume: 1
     pitch: 1
@@ -140,7 +140,7 @@ MonoBehaviour:
     clipList:
     - clip: {fileID: 8300000, guid: b92e538310d4d3846be8bbda8fb816e7, type: 3}
       group: {fileID: -5547214540475356516, guid: d6102a70a325bf2409a936b99795be67, type: 2}
-    - clip: {fileID: 8300000, guid: 6d3ae864b5867924abaa7f34ce290933, type: 3}
+    - clip: {fileID: 8300000, guid: 9919c985ccf002c45849b7178c9077d6, type: 3}
       group: {fileID: -5547214540475356516, guid: d6102a70a325bf2409a936b99795be67, type: 2}
     volume: 1
     pitch: 1

@@ -115,6 +115,7 @@ public class PadScreen : MonoBehaviour
 
     public void HidePad()
     {
+        EventSystem.current.SetSelectedGameObject(null);
         pad.ClosePad();
         if (levelComplete) GameManager.Instance.EndLevel();
     }

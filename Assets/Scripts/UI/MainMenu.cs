@@ -47,6 +47,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame(bool sure = false)
     {
+        SoundManager.Instance.Play(AudioTypes.SFX_MenuClick);
         if (level > 2 && !sure)
         {
             EventSystem.current.SetSelectedGameObject(answerNoBox);
@@ -58,17 +59,20 @@ public class MainMenu : MonoBehaviour
 
     public void ContinueGame()
     {
+        SoundManager.Instance.Play(AudioTypes.SFX_MenuClick);
         GameManager.Instance.ContinueGame();
     }
 
     public void Options()
     {
+        SoundManager.Instance.Play(AudioTypes.SFX_MenuClick);
         EventSystem.current.SetSelectedGameObject(closeOptionBtn);
         anim.SetTrigger("Options");
     }
 
     public void CloseOptions()
     {
+        SoundManager.Instance.Play(AudioTypes.SFX_MenuClick);
         if (level > 2)
             EventSystem.current.SetSelectedGameObject(continueButton);
         else
@@ -78,6 +82,7 @@ public class MainMenu : MonoBehaviour
 
     public void NotSure()
     {
+        SoundManager.Instance.Play(AudioTypes.SFX_MenuClick);
         EventSystem.current.SetSelectedGameObject(continueButton);
         anim.SetTrigger("CloseBox");
     }

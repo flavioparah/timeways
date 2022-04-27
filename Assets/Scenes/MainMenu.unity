@@ -1474,6 +1474,7 @@ GameObject:
   - component: {fileID: 507194382}
   - component: {fileID: 507194381}
   - component: {fileID: 507194380}
+  - component: {fileID: 507194384}
   m_Layer: 5
   m_Name: OptionsBtn
   m_TagString: Untagged
@@ -1614,6 +1615,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507194378}
   m_CullTransparentMesh: 1
+--- !u!114 &507194384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507194378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 359bb33411222a54eb0c388429a80a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &510305663
 GameObject:
   m_ObjectHideFlags: 0
@@ -2689,6 +2702,7 @@ GameObject:
   - component: {fileID: 951241001}
   - component: {fileID: 951241000}
   - component: {fileID: 951240999}
+  - component: {fileID: 951241003}
   m_Layer: 5
   m_Name: ContinueBtn
   m_TagString: Untagged
@@ -2829,6 +2843,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 951240997}
   m_CullTransparentMesh: 1
+--- !u!114 &951241003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951240997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 359bb33411222a54eb0c388429a80a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &953455775
 GameObject:
   m_ObjectHideFlags: 0
@@ -6069,6 +6095,7 @@ GameObject:
   - component: {fileID: 1746212609}
   - component: {fileID: 1746212608}
   - component: {fileID: 1746212607}
+  - component: {fileID: 1746212611}
   m_Layer: 5
   m_Name: StartBtn
   m_TagString: Untagged
@@ -6209,6 +6236,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1746212605}
   m_CullTransparentMesh: 1
+--- !u!114 &1746212611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746212605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 359bb33411222a54eb0c388429a80a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1764877572
 GameObject:
   m_ObjectHideFlags: 0
@@ -6367,6 +6406,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2462614045057243021, guid: 69790f5a2626dac458b819db922dbbfb, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2462614045874948628, guid: 69790f5a2626dac458b819db922dbbfb, type: 3}
       propertyPath: m_Name
       value: ScreenTransition

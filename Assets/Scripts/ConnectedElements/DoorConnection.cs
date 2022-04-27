@@ -84,6 +84,7 @@ public class DoorConnection : Connection
 
         if (protocol >= doorProtocol)
         {
+            padScreen.SetButtonToNavigate(button.GetComponent<Button>());
             isInteractable = true;
             button.GetComponent<Image>().color = firstColor;
             button.GetComponent<Button>().interactable = true;
@@ -97,8 +98,8 @@ public class DoorConnection : Connection
             return;
         }
 
-        this.btnEffectClosed.fillAmount = isOpenButton ? 1 : 0;
-        this.btnEffectOpen.fillAmount = isOpenButton ? 0 : 1;
+        this.btnEffectClosed.fillAmount = isOpenButton ? 0 : 1;
+        this.btnEffectOpen.fillAmount = isOpenButton ? 1 : 0;
         StartCoroutine(ShowingButton(protocol >= doorProtocol));
     }
 

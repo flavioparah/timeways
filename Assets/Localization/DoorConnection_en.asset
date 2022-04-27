@@ -20,15 +20,13 @@ MonoBehaviour:
     - id: 0
   m_TableData:
   - m_Id: 4110830129152
-    m_Localized: 
+    m_Localized: 'Connected to door '
     m_Metadata:
-      m_Items:
-      - id: 0
+      m_Items: []
   - m_Id: 1089429688320
     m_Localized: Access denied
     m_Metadata:
-      m_Items:
-      - id: 0
+      m_Items: []
   - m_Id: 4291923398656
     m_Localized: 'Close
 
@@ -36,13 +34,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4443358744576
-    m_Localized: 
+    m_Localized: 'Open
+
+      door'
     m_Metadata:
-      m_Items:
-      - id: 0
+      m_Items: []
   references:
     version: 1
     00000000:
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 00d091740300000000d011a7fd00000000d09120bd03000000d0d18c0a040000
+        m_Entries: 00d0917403000000

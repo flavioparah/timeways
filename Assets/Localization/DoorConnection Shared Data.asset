@@ -16,19 +16,19 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 46bc56e3ad5aa4c43a2d6cdc0ac1d45c
   m_Entries:
   - m_Id: 1089429688320
-    m_Key: Station/CanvasPad/Image/PadScreen/DoorConection/AuxTexts/connectedText
+    m_Key: Access Denied
     m_Metadata:
       m_Items: []
   - m_Id: 4110830129152
-    m_Key: New Entry
+    m_Key: ConnectedTo
     m_Metadata:
       m_Items: []
   - m_Id: 4291923398656
-    m_Key: Station/CanvasPad/Image/PadScreen/DoorConection/AuxTexts/OpenDoor
+    m_Key: close door
     m_Metadata:
       m_Items: []
   - m_Id: 4443358744576
-    m_Key: New Entry 1
+    m_Key: open door
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -39,7 +39,11 @@ public class TextAnimation : MonoBehaviour
         textToType = text;
         lastCoroutine = StartCoroutine(Typing());
     }
-
+    public void StopTyping()
+    {
+        if (lastCoroutine != null)
+            StopCoroutine(lastCoroutine);
+    }
     public void Erase()
     {
         if (lastCoroutine != null)

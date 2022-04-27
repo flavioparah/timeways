@@ -64,7 +64,8 @@ public class PadScreen : MonoBehaviour
     public void OpenScreen(Panel panel)
     {
         screenOpened = true;
-
+        connection = null;
+        container = null;
 
         if (firstTime)
         {

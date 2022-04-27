@@ -39,7 +39,7 @@ public class DoorConnection : Connection
     PadElement doorButton;
 
     bool isOpenButton;
-
+    bool isInteractable;
     int protocol;
 
     public override void Show(Panel panel)
@@ -48,13 +48,14 @@ public class DoorConnection : Connection
         this.doorPanel = (DoorPanel)panel;
         protocol = GameManager.Instance.GetProtocol();
         ShowButton();
-        
+
     }
     public void ToggleDoorButton()
     {
 
         isOpenButton = !isOpenButton;
         doorToggled = true;
+        text.GetComponent<TextAnimation>().StopTyping();
         EraseTexts();
         StartCoroutine(TogglingDoorButton());
     }
@@ -83,17 +84,19 @@ public class DoorConnection : Connection
 
         if (protocol >= doorProtocol)
         {
+            isInteractable = true;
             button.GetComponent<Image>().color = firstColor;
             button.GetComponent<Button>().interactable = true;
         }
         else
         {
+            isInteractable = false;
             button.GetComponent<Image>().color = secondColor;
             button.GetComponent<Button>().interactable = false;
             padScreen.SetCloseButtonToNavigate();
             return;
         }
-            
+
         this.btnEffectClosed.fillAmount = isOpenButton ? 1 : 0;
         this.btnEffectOpen.fillAmount = isOpenButton ? 0 : 1;
         StartCoroutine(ShowingButton(protocol >= doorProtocol));
@@ -102,13 +105,14 @@ public class DoorConnection : Connection
     public void HideButton()
     {
         EraseTexts();
-        StartCoroutine(HidingButton(false));
+        if (isInteractable)
+            StartCoroutine(HidingButton(false));
     }
 
     #region Texts Methods
     public void SetText(int doorProtocol)
     {
-        
+
         string door = "";
 
         if (protocol >= doorProtocol)
@@ -123,8 +127,8 @@ public class DoorConnection : Connection
             door = connectionDeniedText.text;
             textDenied.GetComponent<TextAnimation>().Type(door);
         }
-            
-        
+
+
     }
 
     public void EraseTexts()
@@ -282,11 +286,11 @@ public class DoorConnection : Connection
             yield return null;
         }
         button.GetComponent<Animator>().enabled = true;
-       
+
         EventSystem.current.SetSelectedGameObject(button);
-       
-           
-       
+
+
+
     }
 
 

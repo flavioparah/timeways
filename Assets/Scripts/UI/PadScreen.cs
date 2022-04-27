@@ -373,6 +373,10 @@ public class PadScreen : MonoBehaviour
         buttonToNavigate = button;
     }
 
+    public void SetCloseButtonToNavigate()
+    {
+        EventSystem.current.SetSelectedGameObject(closeBtn.gameObject);
+    }
     IEnumerator Loading()
     {
         ulisesConnection.OpenLoadingScreen();

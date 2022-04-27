@@ -24,6 +24,7 @@ public class DoorConnection : Connection
 
     [SerializeField] TextAnimation buttonText;
     [SerializeField] TextMeshProUGUI text;
+    [SerializeField] TextMeshProUGUI textDenied;
 
     [SerializeField] TextMeshProUGUI textOpenDoor;
     [SerializeField] TextMeshProUGUI textCloseDoor;
@@ -79,9 +80,23 @@ public class DoorConnection : Connection
         SetText(doorProtocol);
         if (isOpenButton) TypeOpenDoor();
         else TypeCloseDoor();
+
+        if (protocol >= doorProtocol)
+        {
+            button.GetComponent<Image>().color = firstColor;
+            button.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            button.GetComponent<Image>().color = secondColor;
+            button.GetComponent<Button>().interactable = false;
+            padScreen.SetCloseButtonToNavigate();
+            return;
+        }
+            
         this.btnEffectClosed.fillAmount = isOpenButton ? 1 : 0;
         this.btnEffectOpen.fillAmount = isOpenButton ? 0 : 1;
-        StartCoroutine(ShowingButton());
+        StartCoroutine(ShowingButton(protocol >= doorProtocol));
     }
 
     public void HideButton()
@@ -97,14 +112,24 @@ public class DoorConnection : Connection
         string door = "";
 
         if (protocol >= doorProtocol)
+        {
             door = connectedText.text + doorPanel.GetDoorName().ToUpper();
+            text.GetComponent<TextAnimation>().Type(door);
+
+        }
+
         else
+        {
             door = connectionDeniedText.text;
-        text.GetComponent<TextAnimation>().Type(door);
+            textDenied.GetComponent<TextAnimation>().Type(door);
+        }
+            
+        
     }
 
     public void EraseTexts()
     {
+        textDenied.text = "";
         text.text = "";
         buttonText.GetComponent<TextMeshProUGUI>().text = "";
     }
@@ -236,7 +261,7 @@ public class DoorConnection : Connection
 
     }
 
-    IEnumerator ShowingButton()
+    IEnumerator ShowingButton(bool interactable)
     {
         float factor = 0;
 
@@ -257,7 +282,11 @@ public class DoorConnection : Connection
             yield return null;
         }
         button.GetComponent<Animator>().enabled = true;
+       
         EventSystem.current.SetSelectedGameObject(button);
+       
+           
+       
     }
 
 
